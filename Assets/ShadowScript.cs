@@ -7,21 +7,19 @@ public class ShadowScript : MonoBehaviour {
 
     public GameObject shadowPrefab;
 
+    private GameObject player;
+    private List<Vector2> corners;
+
 	// Use this for initialization
 	void Start () {
+        player = GameObject.Find("Player");
+        corners = GetCorners();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        foreach (Transform child in transform) {
-        //child is your child transform
-            if (child.tag == "PlayerSightMask") {
-                Destroy(child.gameObject);
-                Debug.Log("Destroying Mask");
-            }
-        }
         
-        CreateShadow(); 
+        GenerateShadow(); 
     }
 
     List<Vector2> GetCorners() {
@@ -34,20 +32,33 @@ public class ShadowScript : MonoBehaviour {
         corners.Add(new Vector2(center.x + extentX, center.y - extents.y));
         corners.Add(new Vector2(center.x + extentX, center.y + extents.y));
 
-        Debug.Log("Corners: " + corners[0].x + ", " + corners[0].y + ";" + corners[1].x + ", " + corners[1].y + ";" + corners[2].x + ", " + corners[2].y + ";" + corners[3].x + ", " + corners[3].y + ";");
+        // Debug.Log("Corners: " + corners[0].x + ", " + corners[0].y + ";" + corners[1].x + ", " + corners[1].y + ";" + corners[2].x + ", " + corners[2].y + ";" + corners[3].x + ", " + corners[3].y + ";");
 
         return corners;
     }
 
-    void CreateShadow() {
-        Debug.Log("Create Shadow for Platform");
+    // get shadowmask mesh or create object if no mesh present
+    GameObject GetShadow() {
+        foreach (Transform child in transform) {
+            if (child.tag == "PlayerSightMask") {
+                // return existing shadowmask
+                return child.gameObject;
+            }
+        }
+
+        // return new object
+        GameObject shadowInstance = GameObject.Instantiate(shadowPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        shadowInstance.transform.parent = transform;
+        return shadowInstance;
+    }
+
+    void GenerateShadow() {
+        // Debug.Log("Create Shadow for Platform");
 
         Vector3 center = transform.TransformPoint(GetComponent<MeshFilter>().mesh.bounds.center);
         Vector3 extents = GetComponent<MeshFilter>().mesh.bounds.extents;
 
-        GameObject player = GameObject.Find("Player");
 
-        List<Vector2> corners = GetCorners();
         List<float> angles = new List<float>();
         float minAngle = 400f;
         float maxAngle = -400f;
@@ -58,7 +69,7 @@ public class ShadowScript : MonoBehaviour {
             float dy = corners[i].y - player.transform.position.y;
             float dx = corners[i].x - player.transform.position.x;
             angles.Add(Mathf.Atan2(dy,dx) * Mathf.Rad2Deg);
-            Debug.Log("angle: " + angles[i]);
+            // Debug.Log("angle: " + angles[i]);
 
             if (angles[i] < minAngle) {
                 minAngle = angles[i];
@@ -71,15 +82,13 @@ public class ShadowScript : MonoBehaviour {
         }
 
 
-        Debug.Log("max angle: " + maxAngle);
-        Debug.Log("min angle: " + minAngle);
+        // Debug.Log("max angle: " + maxAngle);
+        // Debug.Log("min angle: " + minAngle);
      
-
-
         GameObject shadowInstance;
+        shadowInstance = GetShadow();
         // position 0,0?
-        shadowInstance = GameObject.Instantiate(shadowPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-
+        
         float origMaxX = corners[maxAngleIndex].x;
         float origMaxY = corners[maxAngleIndex].y;
         float origMinX = corners[minAngleIndex].x;
@@ -122,9 +131,8 @@ public class ShadowScript : MonoBehaviour {
         // filter.mesh = msh;
 
         shadowInstance.GetComponent<MeshFilter>().mesh = msh;
-        shadowInstance.transform.parent = transform;
 
-        Debug.Log("Created Shadow");
+        // Debug.Log("Created Shadow");
     }
 }
 
