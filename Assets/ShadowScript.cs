@@ -115,8 +115,8 @@ public class ShadowScript : MonoBehaviour {
         // Create Vector2 vertices
         Vector2[] vertices2D = new Vector2[] {
             new Vector2(origMaxX, origMaxY),
-            new Vector2(origMaxX + 30*Mathf.Cos(Mathf.Deg2Rad * maxAngle), origMaxY + 30*Mathf.Sin(Mathf.Deg2Rad * maxAngle)),
-            new Vector2(origMinX + 30*Mathf.Cos(Mathf.Deg2Rad * minAngle), origMinY + 30*Mathf.Sin(Mathf.Deg2Rad * minAngle)),
+            new Vector2(origMaxX + 100*Mathf.Cos(Mathf.Deg2Rad * maxAngle), origMaxY + 100*Mathf.Sin(Mathf.Deg2Rad * maxAngle)),
+            new Vector2(origMinX + 100*Mathf.Cos(Mathf.Deg2Rad * minAngle), origMinY + 100*Mathf.Sin(Mathf.Deg2Rad * minAngle)),
             new Vector2(origMinX, origMinY)
         };
          
@@ -198,8 +198,8 @@ public class ShadowScript : MonoBehaviour {
         // Create Vector2 vertices
         Vector2[] vertices2D = new Vector2[] {
             new Vector2(origMaxX, origMaxY),
-            new Vector2(origMaxX + 30*Mathf.Cos(Mathf.Deg2Rad * maxAngle), origMaxY + 30*Mathf.Sin(Mathf.Deg2Rad * maxAngle)),
-            new Vector2(origMinX + 30*Mathf.Cos(Mathf.Deg2Rad * minAngle), origMinY + 30*Mathf.Sin(Mathf.Deg2Rad * minAngle)),
+            new Vector2(origMaxX + 100*Mathf.Cos(Mathf.Deg2Rad * maxAngle), origMaxY + 100*Mathf.Sin(Mathf.Deg2Rad * maxAngle)),
+            new Vector2(origMinX + 100*Mathf.Cos(Mathf.Deg2Rad * minAngle), origMinY + 100*Mathf.Sin(Mathf.Deg2Rad * minAngle)),
             new Vector2(origMinX, origMinY)
         };
          
