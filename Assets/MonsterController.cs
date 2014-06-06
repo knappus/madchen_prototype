@@ -5,15 +5,21 @@ public class MonsterController : MonoBehaviour {
 
     public GameObject sightMask;
     public int sightRadius = 60;
+    public float sightLength = 100f;
 
     private Vector3 startPosition;
     private float roamRadius = 0.5f;
     public float roamDistance = 0.1f;
 
+    private bool chasingPlayer = false;
+
+    private GameObject player;
+
 	// Use this for initialization
 	void Start () {
         startPosition = transform.position;
         CreateSightMask();
+        player = GameObject.Find("Player");
 	}
 	
 	// Update is called once per frame
@@ -36,12 +42,35 @@ public class MonsterController : MonoBehaviour {
             rigidbody2D.AddForce(-randomDirection);
     }
 
+
+    public void CheckPlayerSpotted() {
+        // string[] layers = new string[] {"LevelGeometry", "Monster"};
+        int layerMask = LayerMask.GetMask(new string[] {"LevelGeometry", "Player"});
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Mathf.Infinity, layerMask, -Mathf.Infinity, Mathf.Infinity); 
+        Debug.Log("hit: " + hit.transform.gameObject);
+        if (hit.transform.tag == "Player") {
+            SpottedPlayer();
+        } else {
+            LostPlayer();
+        }
+    }
+
+    public void SpottedPlayer() {
+        chasingPlayer = true;
+        Debug.Log("Spotted Player");
+    }
+    public void LostPlayer() {
+        chasingPlayer = false;
+        Debug.Log("Lost Player");
+    }
+
     void CreateSightMask() {
         // calculate point 2
         float origX = transform.position.x;
         float origY = transform.position.y;
-        float deltaY = 200 * Mathf.Sin(Mathf.Deg2Rad * sightRadius/2);
-        float deltaX = 200 * Mathf.Cos(Mathf.Deg2Rad * sightRadius/2);
+        float deltaY = sightLength * Mathf.Sin(Mathf.Deg2Rad * sightRadius/2);
+        float deltaX = sightLength * Mathf.Cos(Mathf.Deg2Rad * sightRadius/2);
 
         Debug.Log("blub");
         Debug.Log("deltaX: " + deltaX);
@@ -52,6 +81,12 @@ public class MonsterController : MonoBehaviour {
             new Vector2(origX, origY),
             new Vector2(deltaX-origX, deltaY-origY),
             new Vector2(deltaX-origX, origY-deltaY)
+        };
+        Vector2[] colliderVertices = new Vector2[] {
+            new Vector2(origX, origY),
+            new Vector2(deltaX-origX, deltaY-origY),
+            new Vector2(deltaX-origX, origY-deltaY),
+            new Vector2(origX, origY)
         };
 
         Vector2[] uvs = vertices2D;
@@ -81,6 +116,9 @@ public class MonsterController : MonoBehaviour {
 
 
         sightMask.GetComponent<MeshFilter>().mesh = msh;
+        //PolygonCollider2D collider = sightMask.collider as PolygonCollider2D;
+        sightMask.GetComponent<PolygonCollider2D>().SetPath(0, vertices2D);
+
     }
 
 }

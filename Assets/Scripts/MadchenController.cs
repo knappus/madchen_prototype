@@ -28,7 +28,7 @@ public class MadchenController : MonoBehaviour {
 
 	}
 
-    void Flip() {
+    public void Flip() {
         facingRight = !facingRight;
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
