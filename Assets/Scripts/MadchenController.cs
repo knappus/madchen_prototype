@@ -84,6 +84,7 @@ public class MadchenController : MonoBehaviour {
         // MeshFilter filter = gameObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
         // filter.mesh = msh;
 
+
         sightMask.GetComponent<MeshFilter>().mesh = msh;
     }
 

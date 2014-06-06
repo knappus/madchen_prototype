@@ -3,6 +3,11 @@
 --- !u!78 &1
 TagManager:
   tags:
+  - Monster
+  - 
+  - MonsterSightMask
+  - 
+  - PlayerSightMask
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -45,6 +50,14 @@ TagManager:
     userID: 1
     uniqueID: 1916091469
     locked: 0
+  - name: MonsterSight
+    userID: 6
+    uniqueID: 3077077727
+    locked: 0
+  - name: MonsterSightShadows
+    userID: 7
+    uniqueID: 1294353059
+    locked: 0
   - name: Midground
     userID: 3
     uniqueID: 1113749365
@@ -52,4 +65,12 @@ TagManager:
   - name: Player
     userID: 2
     uniqueID: 1111322865
+    locked: 0
+  - name: PlayerSightShadows
+    userID: 5
+    uniqueID: 1018081229
+    locked: 0
+  - name: PlayerSightMask
+    userID: 4
+    uniqueID: 2146186225
     locked: 0
