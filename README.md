@@ -5,9 +5,7 @@ MADchen Prototype - Game Design
 
 TODOs
 
-- Kamera Bewegung
-- Monster Bewegung (standard)
-- Monster Bewegung (verfolgung)
+- Monster Bewegung (spruenge)
 - Verstecke
 - Teddy schmeißen
 - Monster Reaktion auf Teddy

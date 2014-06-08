@@ -3,45 +3,73 @@ using System.Collections;
 
 public class MonsterController : MonoBehaviour {
 
+    // monsters sight area
     public GameObject sightMask;
     public int sightRadius = 60;
     public float sightLength = 100f;
-
-    private Vector3 startPosition;
-    private float roamRadius = 0.5f;
-    public float roamDistance = 0.1f;
 
     private bool chasingPlayer = false;
 
     private GameObject player;
 
+    // enemies start and end position
+    float startPos;
+    float endPos;
+
+    // units enemy moves right
+    public float unitsToMove = 5f;
+    // enemy movement speed
+    public float moveSpeed = 2f;
+
+    bool moveRight = true;
+
+
+
 	// Use this for initialization
 	void Start () {
-        startPosition = transform.position;
         CreateSightMask();
         player = GameObject.Find("Player");
 	}
 	
-	// Update is called once per frame
-	void FixedUpdate () {
-	   FreeRoam();
-	}
-     
-    void FreeRoam() {
-        Vector3 randomDirection = Random.insideUnitSphere * roamRadius;
-        randomDirection += startPosition;
-        NavMeshHit hit;
-        NavMesh.SamplePosition(randomDirection, out hit, roamRadius, 1);
-        Vector3 finalPosition = hit.position;
-        
-        //_nav.destination = finalPosition;
+    void FixedUpdate() {
+        // move, depending on if player is being chased
+        if (chasingPlayer) {
+            MoveChasing();
+        } else {
+            MovePatrolling();
+        }
 
-        if (Vector3.Distance(startPosition, transform.position+randomDirection) < roamDistance) 
-            rigidbody2D.AddForce(randomDirection);
-        else
-            rigidbody2D.AddForce(-randomDirection);
+    }
+    
+     
+    void MovePatrolling() {
+       transform.Translate(transform.localScale.x/Mathf.Abs(transform.localScale.x) * moveSpeed * Time.deltaTime, 0,0);
+
+       if ((rigidbody2D.position.x >= endPos) && moveRight) {     
+            moveRight = false;
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+       }
+       if ((rigidbody2D.position.x <= startPos) && !moveRight) {
+            moveRight = true;
+            Vector3 scale = transform.localScale;
+            scale.x *= -1;
+            transform.localScale = scale;
+       }
     }
 
+    void MoveChasing() {
+        Vector2 direction = player.transform.position - transform.position;
+        transform.Translate(direction.x/Mathf.Abs(direction.x) * moveSpeed * Time.deltaTime, 0,0);
+    }
+
+
+    void Awake() {
+        startPos = transform.position.x;
+        endPos = startPos + unitsToMove;
+
+    }
 
     public void CheckPlayerSpotted() {
         // string[] layers = new string[] {"LevelGeometry", "Monster"};
@@ -63,6 +91,12 @@ public class MonsterController : MonoBehaviour {
     public void LostPlayer() {
         chasingPlayer = false;
         Debug.Log("Lost Player");
+    }
+
+    void OnTriggerEnter2D(Collider2D col) {
+        if(col.gameObject.tag == "Player") {
+            Debug.Log("Kill player");
+        }
     }
 
     void CreateSightMask() {

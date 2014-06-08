@@ -519,9 +519,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 846153445}
   - {fileID: 1015222226}
   - {fileID: 719923644}
+  - {fileID: 846153445}
   m_Father: {fileID: 1069604973}
   m_RootOrder: 0
 --- !u!1001 &567069477
@@ -753,7 +753,7 @@ Transform:
   m_LocalScale: {x: 83, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 451146637}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &737501634
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +972,7 @@ Transform:
   m_LocalScale: {x: 5.9000001, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 451146637}
-  m_RootOrder: 0
+  m_RootOrder: 2
 --- !u!1 &1015222222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,7 +1044,7 @@ Transform:
   m_LocalScale: {x: 4.71218872, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 451146637}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!114 &1015222227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1146,6 +1146,10 @@ Prefab:
       propertyPath: monsterController
       value: 
       objectReference: {fileID: 1624714230}
+    - target: {fileID: 11400000, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
+      propertyPath: unitsToMove
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
   m_RootGameObject: {fileID: 1624714229}
@@ -1198,7 +1202,8 @@ MonoBehaviour:
   sightMask: {fileID: 1301130492}
   sightRadius: 60
   sightLength: 100
-  roamDistance: 10
+  unitsToMove: 5
+  moveSpeed: 2
 --- !u!61 &1125838941
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1591,7 +1596,8 @@ MonoBehaviour:
   sightMask: {fileID: 120675859}
   sightRadius: 60
   sightLength: 100
-  roamDistance: 10
+  unitsToMove: 5
+  moveSpeed: 2
 --- !u!61 &1624714231
 BoxCollider2D:
   m_ObjectHideFlags: 0
