@@ -20,7 +20,7 @@ TagManager:
   User Layer 8: LevelGeometry
   User Layer 9: Monster
   User Layer 10: Player
-  User Layer 11: 
+  User Layer 11: Void
   User Layer 12: 
   User Layer 13: 
   User Layer 14: 
@@ -65,6 +65,14 @@ TagManager:
   - name: Player
     userID: 2
     uniqueID: 1111322865
+    locked: 0
+  - name: Hideouts
+    userID: 9
+    uniqueID: 2320361349
+    locked: 0
+  - name: Monster
+    userID: 8
+    uniqueID: 2151862773
     locked: 0
   - name: PlayerSightShadows
     userID: 5

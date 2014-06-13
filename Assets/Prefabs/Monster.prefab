@@ -162,7 +162,8 @@ MonoBehaviour:
   sightMask: {fileID: 100000}
   sightRadius: 60
   sightLength: 100
-  roamDistance: 10
+  unitsToMove: 5
+  moveSpeed: 2
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -174,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e78d988100e3394f8352a3cf623961b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterController: {fileID: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -192,7 +194,7 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
+  m_SortingLayerID: 2151862773
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d9868be8d16e02f458ef47d4d2b28106, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

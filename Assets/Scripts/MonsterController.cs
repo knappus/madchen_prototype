@@ -19,10 +19,12 @@ public class MonsterController : MonoBehaviour {
     // units enemy moves right
     public float unitsToMove = 5f;
     // enemy movement speed
-    public float moveSpeed = 2f;
+    public float moveSpeed = 1f;
+    public float chaseSpeed = 5f;
 
     bool moveRight = true;
 
+    public MadchenController madchenController;
 
 
 	// Use this for initialization
@@ -33,7 +35,7 @@ public class MonsterController : MonoBehaviour {
 	
     void FixedUpdate() {
         // move, depending on if player is being chased
-        if (chasingPlayer) {
+        if (chasingPlayer && !madchenController.IsHidden()) {
             MoveChasing();
         } else {
             MovePatrolling();
@@ -61,7 +63,7 @@ public class MonsterController : MonoBehaviour {
 
     void MoveChasing() {
         Vector2 direction = player.transform.position - transform.position;
-        transform.Translate(direction.x/Mathf.Abs(direction.x) * moveSpeed * Time.deltaTime, 0,0);
+        transform.Translate(direction.x/Mathf.Abs(direction.x) * chaseSpeed * Time.deltaTime, 0,0);
     }
 
 
@@ -76,7 +78,7 @@ public class MonsterController : MonoBehaviour {
         int layerMask = LayerMask.GetMask(new string[] {"LevelGeometry", "Player"});
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Mathf.Infinity, layerMask, -Mathf.Infinity, Mathf.Infinity); 
-        Debug.Log("hit: " + hit.transform.gameObject);
+        // Debug.Log("hit: " + hit.transform.gameObject);
         if (hit.transform.tag == "Player") {
             SpottedPlayer();
         } else {
@@ -86,7 +88,7 @@ public class MonsterController : MonoBehaviour {
 
     public void SpottedPlayer() {
         chasingPlayer = true;
-        Debug.Log("Spotted Player");
+        // Debug.Log("Spotted Player");
     }
     public void LostPlayer() {
         chasingPlayer = false;

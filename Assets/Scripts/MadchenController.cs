@@ -11,8 +11,16 @@ public class MadchenController : MonoBehaviour {
     public GameObject sightMask;
     public int sightRadius = 60;
 
+    private bool hidden = false;
+
+    private BoxCollider2D collider;
+
+    private int monsterLayer; 
+    private int playerLayer;
+
 	// Use this for initialization
 	void Start () {
+        Init();
         CreateSightMask();
 	}
 	
@@ -28,6 +36,13 @@ public class MadchenController : MonoBehaviour {
 
 	}
 
+    void Init() {
+        this.monsterLayer = LayerMask.NameToLayer("Monster");
+        this.playerLayer = LayerMask.NameToLayer("Player");
+        Physics2D.IgnoreLayerCollision(monsterLayer, playerLayer, false);
+
+    }
+
     public void Flip() {
         facingRight = !facingRight;
         Vector3 theScale = transform.localScale;
@@ -37,6 +52,38 @@ public class MadchenController : MonoBehaviour {
 
     bool IsFacingRight() {
         return facingRight;
+    }
+
+    public void Hide() {
+        this.hidden = true;
+        // BoxCollider2D b = collider as BoxCollider2D;
+        // b.isTrigger = true;
+        Physics2D.IgnoreLayerCollision(monsterLayer, playerLayer, true);
+        
+        Debug.Log("hide");
+    }
+    public void Unhide() {
+        this.hidden = false;
+        // this.collider.isTrigger = false;
+
+        Physics2D.IgnoreLayerCollision(monsterLayer, playerLayer, false);
+
+        Debug.Log("unhide");
+    }
+    public bool IsHidden() {
+        return this.hidden;
+    }
+
+
+    public void Die() {
+        Debug.Log("dead");
+        Application.LoadLevel ("level1");
+    }
+
+    void OnCollisionEnter2D(Collision2D coll) {
+        if (coll.gameObject.tag == "Monster") {
+            this.Die();
+        }
     }
 
     void CreateSightMask() {
