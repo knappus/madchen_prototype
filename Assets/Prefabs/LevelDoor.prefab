@@ -10,9 +10,8 @@ GameObject:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
   - 61: {fileID: 6100000}
-  - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: Hideout
+  m_Name: LevelDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.84300017, y: -.882050157, z: -3.68000007}
+  m_LocalPosition: {x: 2.84300017, y: -.882050157, z: 5}
   m_LocalScale: {x: 2.03916597, y: 2.03916955, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -41,18 +40,6 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_Size: {x: .889999986, y: 1.36000001}
   m_Center: {x: 0, y: 0}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10db9cc2fc659a145b086f7873bb1955, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  madchenController: {fileID: 0}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -74,7 +61,7 @@ SpriteRenderer:
   m_SortingLayerID: 2320361349
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 54398ded45d230e43bad3129647a966d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .777897894, g: .882880867, b: .970588207, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
