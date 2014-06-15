@@ -50,7 +50,7 @@ public class MadchenController : MonoBehaviour {
         transform.localScale = theScale;
     }
 
-    bool IsFacingRight() {
+    public bool IsFacingRight() {
         return facingRight;
     }
 

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10db9cc2fc659a145b086f7873bb1955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  madchenController: {fileID: 0}
+  madchenController: {fileID: 11400000, guid: 30d1d7b2e8e10dc46b98237adf9d113d, type: 2}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

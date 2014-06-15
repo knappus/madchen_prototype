@@ -1,4 +1,5 @@
-﻿var madchen : GameObject;
+﻿
+var madchen : GameObject;
 var projectile : Rigidbody2D;
 var speed = 10;
 
