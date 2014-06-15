@@ -94,7 +94,7 @@ public class MonsterController : MonoBehaviour {
 
     public void CheckPlayerSpotted() {
         // string[] layers = new string[] {"LevelGeometry", "Monster"};
-        int layerMask = LayerMask.GetMask(new string[] {"LevelGeometry", "Player", "Teddy"});
+        int layerMask = LayerMask.GetMask(new string[] {"LevelGeometry", "Player"});
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Mathf.Infinity, layerMask, -Mathf.Infinity, Mathf.Infinity); 
         // Debug.Log("hit: " + hit.transform.gameObject);
@@ -125,11 +125,11 @@ public class MonsterController : MonoBehaviour {
                 GameObject teddy = GameObject.FindGameObjectsWithTag("Teddy")[0];
 
                 // string[] layers = new string[] {"LevelGeometry", "Monster"};
-                int layerMask = LayerMask.GetMask(new string[] {"LevelGeometry", "Player", "Teddy"});
+                int layerMask = LayerMask.GetMask(new string[] {"LevelGeometry", "Teddy"});
 
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, teddy.transform.position - transform.position, Mathf.Infinity, layerMask, -Mathf.Infinity, Mathf.Infinity); 
 
-                Debug.Log("hit: " + hit.transform.gameObject);
+                // Debug.Log("hit: " + hit.transform.gameObject);
                 if (hit.transform.tag == "Teddy") {
                     SpottedTeddy(teddy);
                 } else {
@@ -144,7 +144,7 @@ public class MonsterController : MonoBehaviour {
     public void SpottedTeddy(GameObject teddy) {
         this.chasingTeddy = true;
         this.chasedTeddy = teddy;
-        Debug.Log("Spotted Teddy");
+        // Debug.Log("Spotted Teddy");
         FocusOnTeddy(teddy);
         // Debug.Log("Spotted Player");
     }
@@ -155,7 +155,7 @@ public class MonsterController : MonoBehaviour {
     }
     public void LostTeddy() {
         chasingTeddy = false;
-        Debug.Log("Lost Teddy");
+        // Debug.Log("Lost Teddy");
         CreateSightMask();
     }
 
