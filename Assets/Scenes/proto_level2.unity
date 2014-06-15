@@ -577,13 +577,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightMask: {fileID: 2143185477}
   sightRadius: 90
-  sightLength: 150
+  sightLength: 20
   unitsToMove: 6
   moveSpeed: 4
   chaseSpeed: 12
   madchenController: {fileID: 1642534461}
   defaultColor: {r: .558823526, g: .353373706, b: .353373706, a: 0}
   spottedColor: {r: .588235259, g: .108131476, b: .108131476, a: 0}
+  distanceToTeddy: 1
 --- !u!4 &572120181
 Transform:
   m_ObjectHideFlags: 0
@@ -592,7 +593,7 @@ Transform:
   m_GameObject: {fileID: 572120179}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.7430706, y: 6.38984203, z: 4}
-  m_LocalScale: {x: .142323852, y: .142323807, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2143185483}
   m_Father: {fileID: 512198135}
@@ -607,8 +608,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 7.23999977, y: 14.8699989}
-  m_Center: {x: 0, y: -6.19999981}
+  m_Size: {x: 1.22000003, y: 2.3599999}
+  m_Center: {x: 0, y: -1.08000004}
 --- !u!50 &572120183
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -1488,11 +1489,11 @@ Prefab:
       objectReference: {fileID: 1642534461}
     - target: {fileID: 400000, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .166925341
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.997632027
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
       propertyPath: unitsToMove
@@ -1512,7 +1513,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
       propertyPath: sightLength
-      value: 150
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
@@ -1784,7 +1785,7 @@ Transform:
   m_PrefabInternal: {fileID: 1902306339}
   m_GameObject: {fileID: 2143185477}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .166925341, y: -.997632027, z: 1.59000015}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 572120181}

@@ -60,7 +60,7 @@ public class MadchenController : MonoBehaviour {
         // b.isTrigger = true;
         Physics2D.IgnoreLayerCollision(monsterLayer, playerLayer, true);
         
-        Debug.Log("hide");
+        //Debug.Log("hide");
     }
     public void Unhide() {
         this.hidden = false;
@@ -68,7 +68,7 @@ public class MadchenController : MonoBehaviour {
 
         Physics2D.IgnoreLayerCollision(monsterLayer, playerLayer, false);
 
-        Debug.Log("unhide");
+        //Debug.Log("unhide");
     }
     public bool IsHidden() {
         return this.hidden;
