@@ -59,15 +59,16 @@ public class MonsterController : MonoBehaviour {
     
      
     void MovePatrolling() {
+    
        transform.Translate(transform.localScale.x/Mathf.Abs(transform.localScale.x) * moveSpeed * Time.deltaTime, 0,0);
 
-       if ((rigidbody2D.position.x >= endPos) && moveRight) {     
+       if ((rigidbody2D.position.x > endPos) && moveRight) {     
             moveRight = false;
             Vector3 scale = transform.localScale;
             scale.x *= -1;
             transform.localScale = scale;
        }
-       if ((rigidbody2D.position.x <= startPos) && !moveRight) {
+       if ((rigidbody2D.position.x < startPos) && !moveRight) {
             moveRight = true;
             Vector3 scale = transform.localScale;
             scale.x *= -1;

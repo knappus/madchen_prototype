@@ -8,16 +8,21 @@ madchen = GameObject.FindWithTag("Player");
 var script = madchen.GetComponent("MadchenController");
 
 if( Input.GetButtonDown("Fire1")) {
-
-	clone = Instantiate(projectile, transform.position, transform.rotation);
+        
+    teddies = GameObject.FindGameObjectsWithTag ("Teddy");
 	
-	if (script.facingRight == false) { 
-		clone.velocity.x = speed*-1;
- 
-		}else {
-		clone.velocity.x = speed;
-		}
+    if (teddies.length == 0) {
 
-	Destroy (clone.gameObject, 5);
+        clone = Instantiate(projectile, transform.position, transform.rotation);
+        
+        if (script.facingRight == false) { 
+            clone.velocity.x = speed*-1;
+     
+            }else {
+            clone.velocity.x = speed;
+            }
+
+        Destroy (clone.gameObject, 5);
+    }
 
 }}
