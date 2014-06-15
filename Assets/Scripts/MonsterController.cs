@@ -25,7 +25,8 @@ public class MonsterController : MonoBehaviour {
     bool moveRight = true;
 
     public MadchenController madchenController;
-
+    public Color defaultColor = new Color(158,95,95,0);
+    public Color spottedColor = new Color(150,28,28,0);
 
 	// Use this for initialization
 	void Start () {
@@ -79,7 +80,7 @@ public class MonsterController : MonoBehaviour {
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, Mathf.Infinity, layerMask, -Mathf.Infinity, Mathf.Infinity); 
         // Debug.Log("hit: " + hit.transform.gameObject);
-        if (hit.transform.tag == "Player") {
+        if ((hit.transform.tag == "Player") && (!madchenController.IsHidden())) {
             SpottedPlayer();
         } else {
             LostPlayer();
@@ -89,10 +90,14 @@ public class MonsterController : MonoBehaviour {
     public void SpottedPlayer() {
         chasingPlayer = true;
         // Debug.Log("Spotted Player");
+
+        sightMask.GetComponent<MeshRenderer>().materials[0].color = spottedColor;
     }
     public void LostPlayer() {
         chasingPlayer = false;
         Debug.Log("Lost Player");
+
+        sightMask.GetComponent<MeshRenderer>().materials[0].color = defaultColor;
     }
 
     void OnTriggerEnter2D(Collider2D col) {
@@ -103,8 +108,8 @@ public class MonsterController : MonoBehaviour {
 
     void CreateSightMask() {
         // calculate point 2
-        float origX = transform.position.x;
-        float origY = transform.position.y;
+        float origX = 0;
+        float origY = 0;
         float deltaY = sightLength * Mathf.Sin(Mathf.Deg2Rad * sightRadius/2);
         float deltaX = sightLength * Mathf.Cos(Mathf.Deg2Rad * sightRadius/2);
 
@@ -155,6 +160,7 @@ public class MonsterController : MonoBehaviour {
         //PolygonCollider2D collider = sightMask.collider as PolygonCollider2D;
         sightMask.GetComponent<PolygonCollider2D>().SetPath(0, vertices2D);
 
+        sightMask.GetComponent<MeshRenderer>().materials[0].color = defaultColor;
     }
 
 }

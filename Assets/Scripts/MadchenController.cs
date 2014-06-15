@@ -77,7 +77,8 @@ public class MadchenController : MonoBehaviour {
 
     public void Die() {
         Debug.Log("dead");
-        Application.LoadLevel ("level1");
+        // yield WaitForSeconds(0.1); // or however long you want it to wait
+        Application.LoadLevel(Application.loadedLevel);
     }
 
     void OnCollisionEnter2D(Collision2D coll) {
@@ -88,8 +89,11 @@ public class MadchenController : MonoBehaviour {
 
     void CreateSightMask() {
         // calculate point 2
-        float origX = transform.position.x;
-        float origY = transform.position.y;
+        // float origX = transform.position.x;
+        // float origY = transform.position.y;
+        float origX = 0;
+        float origY = 0;
+        
         float deltaY = 30 * Mathf.Sin(Mathf.Deg2Rad * sightRadius/2);
         float deltaX = 30 * Mathf.Cos(Mathf.Deg2Rad * sightRadius/2);
 

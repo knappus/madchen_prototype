@@ -29,10 +29,11 @@ public class ShadowScript : MonoBehaviour {
         Vector3 extents = GetComponent<MeshFilter>().mesh.bounds.extents;
         List<Vector2> corners = new List<Vector2>();
         float extentX = transform.localScale.x/2;
-        corners.Add(new Vector2(center.x - extentX, center.y - extents.y));
-        corners.Add(new Vector2(center.x - extentX, center.y + extents.y));
-        corners.Add(new Vector2(center.x + extentX, center.y - extents.y));
-        corners.Add(new Vector2(center.x + extentX, center.y + extents.y));
+        float extentY = transform.localScale.y/2;
+        corners.Add(new Vector2(center.x - extentX, center.y - extentY));
+        corners.Add(new Vector2(center.x - extentX, center.y + extentY));
+        corners.Add(new Vector2(center.x + extentX, center.y - extentY));
+        corners.Add(new Vector2(center.x + extentX, center.y + extentY));
 
         // Debug.Log("Corners: " + corners[0].x + ", " + corners[0].y + ";" + corners[1].x + ", " + corners[1].y + ";" + corners[2].x + ", " + corners[2].y + ";" + corners[3].x + ", " + corners[3].y + ";");
 
