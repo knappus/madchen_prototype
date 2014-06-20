@@ -6,13 +6,10 @@ MADchen Prototype - Game Design
 TODOs
 
 - Monster Bewegung (spruenge)
-- Teddy schmeißen
-- Monster Reaktion auf Teddy
 
 
 Feedback
 
-- textur im hintergrund
 - muss der geworfene teddy wirklich im monster-sichtfeld sein?
 - monster blind machen
 - monster die unter Betten hervorschauen
@@ -27,3 +24,6 @@ Feedback
 - sichtfelder haben noch keine daseinsberechtigung / spielmechanik nutzt es noch viel zu wenig aus
 - schwerpunkt mehr auf verstecken und durchschlüpfen legen
 - monster mit verschiedenen sichtfeldern
+
+Done
+- textur im hintergrund

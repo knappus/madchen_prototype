@@ -407,7 +407,7 @@ public class MonsterController : MonoBehaviour {
         float maxAngle = -400f;
         int minAngleIndex = 0;
         int maxAngleIndex = 0;
-        for (int i=0; i<cornedrs.Count; i++)
+        for (int i=0; i<corners.Count; i++)
         {
             float dy = corners[i].y - transform.position.y;
             float dx = corners[i].x - transform.position.x;
