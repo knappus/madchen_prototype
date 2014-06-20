@@ -166,8 +166,8 @@ MonoBehaviour:
   moveSpeed: 3
   chaseSpeed: 7
   madchenController: {fileID: 0}
-  defaultColor: {r: .558823526, g: .353373706, b: .353373706, a: 0}
-  spottedColor: {r: .588235259, g: .108131476, b: .108131476, a: 0}
+  defaultColor: {r: .558823526, g: .353373706, b: .353373706, a: .745098054}
+  spottedColor: {r: .588235259, g: .108131476, b: .108131476, a: .419607848}
   distanceToTeddy: 1
 --- !u!114 &11400002
 MonoBehaviour:

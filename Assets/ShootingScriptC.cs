@@ -10,6 +10,7 @@ public class ShootingScriptC : MonoBehaviour {
     public int speed = 10;
 
     private MadchenController madchenController;
+    private GameObject teddyProjectile;
 
 	// Use this for initialization
 	void Start () {
@@ -19,30 +20,50 @@ public class ShootingScriptC : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
         if (Input.GetButtonDown("Fire1")) {
-            GameObject[] teddies = GameObject.FindGameObjectsWithTag("Teddy");
-            
-            GameObject sightMask = GameObject.FindWithTag("PlayerSightMask");
-
-            Debug.Log("right: " + sightMask.transform.right);
-            Debug.Log("up: " + sightMask.transform.up);
-
-
-            if (teddies.Length == 0) {
-                Rigidbody2D clone = Instantiate(projectile, transform.position, transform.rotation) as Rigidbody2D;
-                Vector2 throwAngle = new Vector2(sightMask.transform.right.x, sightMask.transform.right.y);
-                if (madchenController.IsFacingRight()) {
-                    //clone.AddForce(new Vector2(speed, 0));
-                    // clone.velocity = new Vector2(speed, clone.velocity.y);
-                    clone.velocity = throwAngle * speed;
-                } else {
-                    //clone.AddForce(new Vector2(-speed, 0));
-                    clone.velocity = new Vector2(throwAngle.x * -speed, throwAngle.y * speed);
-                }
-                Destroy(clone.gameObject, 5);
+            if (this.teddyProjectile == null) {
+                ThrowTeddy();
+            } else {
+                DestroyProjectile();
             }
+            
         }
 
 	}
+
+    void ThrowTeddy() {
+        GameObject[] teddies = GameObject.FindGameObjectsWithTag("Teddy");
+            
+        GameObject sightMask = GameObject.FindWithTag("PlayerSightMask");
+
+        Debug.Log("right: " + sightMask.transform.right);
+        Debug.Log("up: " + sightMask.transform.up);
+
+
+        if (teddies.Length == 0) {
+            GameObject teddy = GameObject.Find("Teddy");
+            teddy.renderer.enabled = false;
+            Rigidbody2D clone = Instantiate(this.projectile, this.transform.position, this.transform.rotation) as Rigidbody2D;
+            this.teddyProjectile = clone.gameObject;
+            Vector2 throwAngle = new Vector2(sightMask.transform.right.x, sightMask.transform.right.y);
+            if (madchenController.IsFacingRight()) {
+                //clone.AddForce(new Vector2(speed, 0));
+                // clone.velocity = new Vector2(speed, clone.velocity.y);
+                clone.velocity = throwAngle * speed;
+            } else {
+                //clone.AddForce(new Vector2(-speed, 0));
+                clone.velocity = new Vector2(throwAngle.x * -speed, throwAngle.y * speed);
+            }
+            Invoke("DestroyProjectile", 5);
+        }
+    }
+
+    void DestroyProjectile() {
+        CancelInvoke("DestroyProjectile");
+        Destroy(this.teddyProjectile);
+        this.teddyProjectile = null;
+        GameObject teddy = GameObject.Find("Teddy");
+        teddy.renderer.enabled = true;
+    }
 }

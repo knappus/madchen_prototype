@@ -31,8 +31,8 @@ public class MonsterController : MonoBehaviour {
     bool moveRight = true;
 
     public MadchenController madchenController;
-    public Color defaultColor = new Color(158,95,95,0);
-    public Color spottedColor = new Color(150,28,28,0);
+    public Color defaultColor = new Color(158,95,95,200);
+    public Color spottedColor = new Color(150,28,28,200);
 
     public float distanceToTeddy = 0.5f;
 

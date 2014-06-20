@@ -94,8 +94,8 @@ public class MadchenController : MonoBehaviour {
         float origX = 0;
         float origY = 0;
         
-        float deltaY = 30 * Mathf.Sin(Mathf.Deg2Rad * sightRadius/2);
-        float deltaX = 30 * Mathf.Cos(Mathf.Deg2Rad * sightRadius/2);
+        float deltaY = 100 * Mathf.Sin(Mathf.Deg2Rad * sightRadius/2);
+        float deltaX = 100 * Mathf.Cos(Mathf.Deg2Rad * sightRadius/2);
 
         Debug.Log("blub");
         Debug.Log("deltaX: " + deltaX);
