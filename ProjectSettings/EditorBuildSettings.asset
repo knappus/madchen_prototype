@@ -7,17 +7,11 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/proto_level1.unity
-  - enabled: 0
-    path: Assets/Scenes/proto_level1.unity
-  - enabled: 0
-    path: Assets/Scenes/proto_level1.unity
-  - enabled: 0
-    path: Assets/Scenes/proto_level1.unity
   - enabled: 1
     path: Assets/Scenes/proto_level2.unity
   - enabled: 1
     path: Assets/Scenes/proto_level3.unity
   - enabled: 1
-    path: Assets/Scenes/proto_level_long.unity
+    path: Assets/Scenes/proto_level4.unity
   - enabled: 1
-    path: Assets/Scenes/level1.unity
+    path: Assets/Scenes/proto_level5.unity
