@@ -14,17 +14,23 @@ public class ShadowScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         player = GameObject.Find("Player");
-        corners = GetCorners();
+        corners = CalculateCorners();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
         
         GeneratePlayerShadow(); 
-        GenerateMonsterShadow(GameObject.Find("Monster"));
+        //GenerateMonsterShadow(GameObject.Find("Monster"));
     }
 
-    List<Vector2> GetCorners() {
+
+    public List<Vector2> GetCorners() {
+        return corners;
+    }
+
+    List<Vector2> CalculateCorners() {
         Vector3 center = transform.TransformPoint(GetComponent<MeshFilter>().mesh.bounds.center);
         Vector3 extents = GetComponent<MeshFilter>().mesh.bounds.extents;
         List<Vector2> corners = new List<Vector2>();
@@ -153,7 +159,6 @@ public class ShadowScript : MonoBehaviour {
 
         // Debug.Log("Created Shadow");
     }
-
 
 
     void GenerateMonsterShadow(GameObject monster) {

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -7,6 +7,7 @@ public class MonsterController : MonoBehaviour {
 
     // monsters sight area
     public GameObject sightMask;
+    private MonsterSightController monsterSightController;
     public int sightRadius = 60;
     public float sightLength = 100f;
 
@@ -15,6 +16,7 @@ public class MonsterController : MonoBehaviour {
     private GameObject chasedTeddy;
 
     private GameObject player;
+
 
     // enemies start and end position
     float startPos;
@@ -37,15 +39,18 @@ public class MonsterController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         CreateSightMask();
-        player = GameObject.Find("Player");
+        this.player = GameObject.Find("Player");
+        this.monsterSightController = (MonsterSightController) sightMask.GetComponent(typeof(MonsterSightController));
 	}
 	
     void FixedUpdate() {
+        // UpdateSightMask();
+
         if (this.chasingTeddy) {
             CheckTeddySpotted();
         }
         // move, depending on if player is being chased
-        if (chasingPlayer && !madchenController.IsHidden()) {
+        if (this.chasingPlayer && !this.madchenController.IsHidden()) {
             MoveChasing();
         } else {
             if (chasingTeddy) {
@@ -55,6 +60,7 @@ public class MonsterController : MonoBehaviour {
             }
         }
 
+        CalculateSightMask();
     }
     
      
@@ -263,17 +269,12 @@ public class MonsterController : MonoBehaviour {
     }
 
 
-
     void CreateSightMask() {
         // calculate point 2
         float origX = 0;
         float origY = 0;
         float deltaY = sightLength * Mathf.Sin(Mathf.Deg2Rad * sightRadius/2);
         float deltaX = sightLength * Mathf.Cos(Mathf.Deg2Rad * sightRadius/2);
-
-        Debug.Log("blub");
-        Debug.Log("deltaX: " + deltaX);
-        Debug.Log("<deltaY></deltaY>: " + deltaY);
 
         // Create Vector2 vertices
         Vector2[] vertices2D = new Vector2[] {
@@ -324,5 +325,124 @@ public class MonsterController : MonoBehaviour {
         sightMask.GetComponent<MeshRenderer>().materials[0].color = defaultColor;
     }
 
+
+
+    void CalculateSightMask() {
+
+        // calculate point 2
+        float origX = transform.position.x;
+        float origY = transform.position.y;
+        float deltaY = transform.localScale.x * sightLength * Mathf.Sin(Mathf.Deg2Rad * sightRadius/2);
+        float deltaX = transform.localScale.x * sightLength * Mathf.Cos(Mathf.Deg2Rad * sightRadius/2);
+
+        // Create Vector2 vertices
+        Vector2[] sightMesh = new Vector2[] {
+            new Vector2(origX, origY),
+            new Vector2(deltaX+origX, deltaY+origY),
+            new Vector2(deltaX+origX, -deltaY+origY)
+        };
+
+        foreach (GameObject platform in this.monsterSightController.GetCollidingPlatforms()) {
+            sightMesh = ClipperInterface.MeshDifference(sightMesh, GetPlatformShadow(platform));
+        }
+        Vector2[] vertices2D = sightMesh;
+
+        // put it back to relative coordinates
+        Vector2 delta = new Vector2(origX, origY);
+        for (int i=0; i<sightMesh.Length; i++) {
+            sightMesh[i] = sightMesh[i] - delta;
+        }
+
+        Vector2[] colliderVertices = new Vector2[] {
+            vertices2D[0],
+            vertices2D[1],
+            vertices2D[2],
+            vertices2D[0],
+        };
+
+        Vector2[] uvs = vertices2D;
+ 
+        // Use the triangulator to get indices for creating triangles
+        Triangulator tr = new Triangulator(vertices2D);
+        int[] indices = tr.Triangulate();
+ 
+        // Create the Vector3 vertices
+        Vector3[] vertices = new Vector3[vertices2D.Length];
+        for (int i=0; i<vertices.Length; i++) {
+            vertices[i] = new Vector3(vertices2D[i].x, vertices2D[i].y, 0);
+        }
+ 
+        // Create the mesh
+        Mesh msh = new Mesh();
+        msh.vertices = vertices;
+        msh.triangles = indices;
+        msh.uv = uvs;
+        msh.RecalculateNormals();
+        msh.RecalculateBounds();
+ 
+        // Set up game object with mesh;
+        // gameObject.AddComponent(typeof(MeshRenderer));
+        // MeshFilter filter = gameObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
+        // filter.mesh = msh;
+
+        Vector3 origScale = sightMask.transform.localScale;
+        origScale.x = transform.localScale.x;
+        sightMask.transform.localScale = origScale;
+
+        sightMask.GetComponent<MeshFilter>().mesh = msh;
+        //PolygonCollider2D collider = sightMask.collider as PolygonCollider2D;
+        sightMask.GetComponent<PolygonCollider2D>().SetPath(0, vertices2D);
+
+        sightMask.GetComponent<MeshRenderer>().materials[0].color = defaultColor;
+    }
+
+
+    Vector2[] GetPlatformShadow(GameObject platform) {
+        // Debug.Log("Create Shadow for Platform");
+
+        ShadowScript shadowScript = (ShadowScript) platform.GetComponent(typeof(ShadowScript));
+        List<Vector2> corners = shadowScript.GetCorners();
+
+
+        List<float> angles = new List<float>();
+        float minAngle = 400f;
+        float maxAngle = -400f;
+        int minAngleIndex = 0;
+        int maxAngleIndex = 0;
+        for (int i=0; i<corners.Count; i++)
+        {
+            float dy = corners[i].y - transform.position.y;
+            float dx = corners[i].x - transform.position.x;
+            angles.Add(Mathf.Atan2(dy,dx) * Mathf.Rad2Deg);
+            // Debug.Log("angle: " + angles[i]);
+
+            if (angles[i] < minAngle) {
+                minAngle = angles[i];
+                minAngleIndex = i;
+            }
+            if (angles[i] > maxAngle) {
+                maxAngle = angles[i];
+                maxAngleIndex = i;
+            }
+        }
+
+        float origMaxX = corners[maxAngleIndex].x;
+        float origMaxY = corners[maxAngleIndex].y;
+        float origMinX = corners[minAngleIndex].x;
+        float origMinY = corners[minAngleIndex].y;
+        //float deltaY = 30 * Mathf.Sin(Mathf.Deg2Rad * sightRadius/2);
+        //float deltaX = 30 * Mathf.Cos(Mathf.Deg2Rad * sightRadius/2);
+
+        // Create Vector2 vertices
+        Vector2[] vertices2D = new Vector2[] {
+            new Vector2(origMaxX, origMaxY),
+            new Vector2(origMaxX + 100*Mathf.Cos(Mathf.Deg2Rad * maxAngle), origMaxY + 100*Mathf.Sin(Mathf.Deg2Rad * maxAngle)),
+            new Vector2(origMinX + 100*Mathf.Cos(Mathf.Deg2Rad * minAngle), origMinY + 100*Mathf.Sin(Mathf.Deg2Rad * minAngle)),
+            new Vector2(origMinX, origMinY),
+            new Vector2(origMaxX, origMaxY)
+        };
+        
+        return vertices2D;
+    }
 
 }
