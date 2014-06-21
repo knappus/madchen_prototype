@@ -960,6 +960,7 @@ MonoBehaviour:
   distanceToTeddy: 1
   stayStill: 1
   lookLeft: 1
+  ignoreTeddy: 0
 --- !u!61 &847348995
 BoxCollider2D:
   m_ObjectHideFlags: 0

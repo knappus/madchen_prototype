@@ -42,6 +42,8 @@ public class MonsterController : MonoBehaviour {
     public bool stayStill = false;
     public bool lookLeft = false;
 
+    public bool ignoreTeddy = false;
+
 	// Use this for initialization
 	void Start () {
         this.player = GameObject.Find("Player");
@@ -169,11 +171,19 @@ public class MonsterController : MonoBehaviour {
     }
 
     public void SpottedTeddy(GameObject teddy) {
-        this.chasingTeddy = true;
-        this.chasedTeddy = teddy;
+        if (!ignoreTeddy) {
+            this.chasingTeddy = true;
+            this.chasedTeddy = teddy;
+            Invoke("IgnoreTeddy",5);
+        }
         // Debug.Log("Spotted Teddy");
         // FocusOnTeddy(teddy);
         // Debug.Log("Spotted Player");
+    }
+
+    public void IgnoreTeddy() {
+        LostTeddy();
+        this.ignoreTeddy = true;
     }
 
     public void ExitTeddy() {
