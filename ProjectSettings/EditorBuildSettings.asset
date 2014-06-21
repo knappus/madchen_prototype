@@ -15,3 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/proto_level4.unity
   - enabled: 1
     path: Assets/Scenes/proto_level5.unity
+  - enabled: 0
+    path: Assets/Scenes/switch_level.unity
+  - enabled: 1
+    path: Assets/Scenes/proto_jump.unity

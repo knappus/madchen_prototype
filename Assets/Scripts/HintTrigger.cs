@@ -21,6 +21,7 @@ public class HintTrigger : MonoBehaviour {
 			Debug.Log ("Entering Hint Collider");
 			hint.active = true;
 			Destroy (hint, 5);
+			Destroy (this, 5);
 		}
 	}
 

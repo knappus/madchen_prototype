@@ -3,11 +3,8 @@
 --- !u!78 &1
 TagManager:
   tags:
+  - Stone
   - Monster
-  - 
-  - MonsterSightMask
-  - 
-  - PlayerSightMask
   - 
   - Teddy
   - 

@@ -85,6 +85,11 @@ public class MadchenController : MonoBehaviour {
         if (coll.gameObject.tag == "Monster") {
             this.Die();
         }
+        if (coll.gameObject.tag == "Teddy") {
+            GameObject go = GameObject.Find("Barrel");
+            ShootingScriptC shootingScript = (ShootingScriptC) go.GetComponent(typeof(ShootingScriptC));
+            shootingScript.DestroyProjectile();
+        }
     }
 
     void CreateSightMask() {

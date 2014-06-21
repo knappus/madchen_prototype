@@ -33,21 +33,30 @@ public class MonsterController : MonoBehaviour {
     public MadchenController madchenController;
     public Color defaultColor = new Color(158,95,95,200);
     public Color spottedColor = new Color(150,28,28,200);
+    // public Material defaultMaterial;
+    // public Material spottedMaterial;
+
 
     public float distanceToTeddy = 0.5f;
+
+    public bool stayStill = false;
+    public bool lookLeft = false;
 
 	// Use this for initialization
 	void Start () {
         this.player = GameObject.Find("Player");
         this.monsterSightController = (MonsterSightController) sightMask.GetComponent(typeof(MonsterSightController));
+        if (lookLeft)
+            Flip();
         CalculateSightMask();
+
 	}
 	
     void FixedUpdate() {
         // UpdateSightMask();
 
         if (this.chasingTeddy) {
-            CheckTeddySpotted();
+            CheckTeddyPresence();
         }
         // move, depending on if player is being chased
         if (this.chasingPlayer && !this.madchenController.IsHidden()) {
@@ -56,7 +65,8 @@ public class MonsterController : MonoBehaviour {
             if (chasingTeddy) {
                 MoveChasingTeddy();
             } else {
-                MovePatrolling();
+                if (!stayStill)
+                    MovePatrolling();
             }
         }
 
@@ -69,17 +79,18 @@ public class MonsterController : MonoBehaviour {
        transform.Translate(transform.localScale.x/Mathf.Abs(transform.localScale.x) * moveSpeed * Time.deltaTime, 0,0);
 
        if ((rigidbody2D.position.x > endPos) && moveRight) {     
-            moveRight = false;
-            Vector3 scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
+            Flip();
        }
        if ((rigidbody2D.position.x < startPos) && !moveRight) {
-            moveRight = true;
-            Vector3 scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
+            Flip();
        }
+    }
+
+    void Flip() {
+        moveRight = !moveRight;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 
     void MoveChasing() {
@@ -117,12 +128,21 @@ public class MonsterController : MonoBehaviour {
         // Debug.Log("Spotted Player");
         // LostTeddy();
         sightMask.GetComponent<MeshRenderer>().materials[0].color = spottedColor;
+        // sightMask.renderer.material = spottedMaterial;
     }
     public void LostPlayer() {
         chasingPlayer = false;
         Debug.Log("Lost Player");
 
         sightMask.GetComponent<MeshRenderer>().materials[0].color = defaultColor;
+        // sightMask.renderer.material = defaultMaterial;
+    }
+
+    public void CheckTeddyPresence() {
+        GameObject[] teddies = GameObject.FindGameObjectsWithTag("Teddy");
+        if ((teddies.Length == 0) || chasingPlayer) {
+            LostTeddy();
+        }
     }
 
     public void CheckTeddySpotted() {
@@ -173,7 +193,19 @@ public class MonsterController : MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter2D(Collision2D col) {
+        if(col.gameObject.tag == "Stone") {
+            // stone hit monster
+            Debug.Log("stone hit monster with force " + col.relativeVelocity.magnitude);
+            if (col.relativeVelocity.magnitude > 5) {
+                this.Die();
+            }
+        }
+    }
 
+    void Die() {
+        Destroy(this.gameObject);
+    }
 
     List<Vector2> GetTeddyCorners(GameObject teddy) {
         Vector3 center = teddy.GetComponent<SpriteRenderer>().bounds.center;
@@ -341,7 +373,8 @@ public class MonsterController : MonoBehaviour {
             sightMesh = GetChasingTeddySight();
 
         foreach (GameObject platform in this.monsterSightController.GetCollidingPlatforms()) {
-            sightMesh = ClipperInterface.MeshDifference(sightMesh, GetPlatformShadow(platform));
+            if (platform != null)
+                sightMesh = ClipperInterface.MeshDifference(sightMesh, GetPlatformShadow(platform));
         }
         Vector2[] vertices2D = sightMesh;
 
@@ -358,6 +391,13 @@ public class MonsterController : MonoBehaviour {
             vertices2D[0],
         };
 
+        /*
+        Vector2[] uvs = new Vector2[] {
+            new Vector2(0.5f,0.5f),
+            new Vector2(0.5f,1f),
+            new Vector2(0f,1f),
+        };
+        */
         Vector2[] uvs = vertices2D;
  
         // Use the triangulator to get indices for creating triangles
@@ -392,6 +432,7 @@ public class MonsterController : MonoBehaviour {
         sightMask.GetComponent<PolygonCollider2D>().SetPath(0, vertices2D);
 
         sightMask.GetComponent<MeshRenderer>().materials[0].color = defaultColor;
+        // sightMask.renderer.material = defaultMaterial;
     }
 
 
@@ -400,7 +441,6 @@ public class MonsterController : MonoBehaviour {
 
         ShadowScript shadowScript = (ShadowScript) platform.GetComponent(typeof(ShadowScript));
         List<Vector2> corners = shadowScript.GetCorners();
-
 
         List<float> angles = new List<float>();
         float minAngle = 400f;
@@ -434,8 +474,8 @@ public class MonsterController : MonoBehaviour {
         // Create Vector2 vertices
         Vector2[] vertices2D = new Vector2[] {
             new Vector2(origMaxX, origMaxY),
-            new Vector2(origMaxX + 100*Mathf.Cos(Mathf.Deg2Rad * maxAngle), origMaxY + 100*Mathf.Sin(Mathf.Deg2Rad * maxAngle)),
-            new Vector2(origMinX + 100*Mathf.Cos(Mathf.Deg2Rad * minAngle), origMinY + 100*Mathf.Sin(Mathf.Deg2Rad * minAngle)),
+            new Vector2(origMaxX + 500*Mathf.Cos(Mathf.Deg2Rad * maxAngle), origMaxY + 500*Mathf.Sin(Mathf.Deg2Rad * maxAngle)),
+            new Vector2(origMinX + 500*Mathf.Cos(Mathf.Deg2Rad * minAngle), origMinY + 500*Mathf.Sin(Mathf.Deg2Rad * minAngle)),
             new Vector2(origMinX, origMinY),
             new Vector2(origMaxX, origMaxY)
         };
@@ -497,6 +537,7 @@ public class MonsterController : MonoBehaviour {
         sightMask.GetComponent<PolygonCollider2D>().SetPath(0, vertices2D);
 
         sightMask.GetComponent<MeshRenderer>().materials[0].color = defaultColor;
+        // sightMask.renderer.material = defaultMaterial;
     }
 
 }

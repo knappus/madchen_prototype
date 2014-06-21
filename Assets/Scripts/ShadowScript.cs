@@ -14,7 +14,7 @@ public class ShadowScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         player = GameObject.Find("Player");
-        corners = CalculateCorners();
+        CalculateCorners();
 
 	}
 	
@@ -30,7 +30,7 @@ public class ShadowScript : MonoBehaviour {
         return corners;
     }
 
-    List<Vector2> CalculateCorners() {
+    public void CalculateCorners() {
         Vector3 center = transform.TransformPoint(GetComponent<MeshFilter>().mesh.bounds.center);
         Vector3 extents = GetComponent<MeshFilter>().mesh.bounds.extents;
         List<Vector2> corners = new List<Vector2>();
@@ -43,7 +43,7 @@ public class ShadowScript : MonoBehaviour {
 
         // Debug.Log("Corners: " + corners[0].x + ", " + corners[0].y + ";" + corners[1].x + ", " + corners[1].y + ";" + corners[2].x + ", " + corners[2].y + ";" + corners[3].x + ", " + corners[3].y + ";");
 
-        return corners;
+        this.corners = corners;
     }
 
     // get shadowmask mesh or create object if no mesh present

@@ -43,7 +43,8 @@ public class MonsterSightController : MonoBehaviour {
         
         if (other.tag == "Teddy") {
             Debug.Log("enter teddy");
-            monsterController.CheckTeddySpotted();
+            // monsterController.CheckTeddySpotted();
+            monsterController.SpottedTeddy(other.gameObject);
         } 
 
         /*

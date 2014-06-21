@@ -12,6 +12,8 @@ public class ShootingScriptC : MonoBehaviour {
     private MadchenController madchenController;
     private GameObject teddyProjectile;
 
+    public bool pickUp = false;
+
 	// Use this for initialization
 	void Start () {
         madchen = GameObject.FindWithTag("Player");
@@ -25,7 +27,9 @@ public class ShootingScriptC : MonoBehaviour {
             if (this.teddyProjectile == null) {
                 ThrowTeddy();
             } else {
-                DestroyProjectile();
+                if (!pickUp) {
+                    DestroyProjectile();
+                }
             }
             
         }
@@ -55,11 +59,13 @@ public class ShootingScriptC : MonoBehaviour {
                 //clone.AddForce(new Vector2(-speed, 0));
                 clone.velocity = new Vector2(throwAngle.x * -speed, throwAngle.y * speed);
             }
-            Invoke("DestroyProjectile", 5);
+            if (!pickUp) {
+                Invoke("DestroyProjectile", 5);
+            }
         }
     }
 
-    void DestroyProjectile() {
+    public void DestroyProjectile() {
         CancelInvoke("DestroyProjectile");
         Destroy(this.teddyProjectile);
         this.teddyProjectile = null;
