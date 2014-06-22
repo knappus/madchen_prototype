@@ -245,6 +245,7 @@ GameObject:
   - 23: {fileID: 326440390}
   - 114: {fileID: 326440392}
   - 114: {fileID: 326440389}
+  - 114: {fileID: 326440393}
   m_Layer: 0
   m_Name: SightMask
   m_TagString: PlayerSightMask
@@ -259,7 +260,7 @@ Transform:
   m_PrefabInternal: {fileID: 1777321232}
   m_GameObject: {fileID: 326440387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .278036118, y: .88189131, z: 0}
+  m_LocalPosition: {x: .183082581, y: .565383971, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1053077795}
@@ -312,6 +313,21 @@ MeshFilter:
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400004, guid: 30d1d7b2e8e10dc46b98237adf9d113d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1777321232}
+  m_GameObject: {fileID: 326440387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5866eb116f26a40458720b2791b21639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 50
+  maxRotationAngle: 60
+  madchenController: {fileID: 1053077791}
+--- !u!114 &326440393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400010, guid: 30d1d7b2e8e10dc46b98237adf9d113d,
     type: 2}
   m_PrefabInternal: {fileID: 1777321232}
   m_GameObject: {fileID: 326440387}
@@ -466,15 +482,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sightMask: {fileID: 113036093}
-  sightRadius: 60
-  sightLength: 15
+  sightRadius: 90
+  sightLength: 30
   unitsToMove: 6
-  moveSpeed: 3
-  chaseSpeed: 7
+  moveSpeed: 4
+  chaseSpeed: 12
   madchenController: {fileID: 1053077791}
   defaultColor: {r: .558823526, g: .353373706, b: .353373706, a: .745098054}
   spottedColor: {r: .588235259, g: .108131476, b: .108131476, a: .419607848}
   distanceToTeddy: 1
+  stayStill: 0
+  lookLeft: 0
+  ignoreTeddy: 0
 --- !u!61 &526843411
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -494,10 +513,10 @@ Rigidbody2D:
     type: 2}
   m_PrefabInternal: {fileID: 661428689}
   m_GameObject: {fileID: 526843408}
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 1
+  m_GravityScale: 9
   m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -733,7 +752,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1015237850}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.52428818, y: 4.7774415, z: -2.16064453}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .63590759, y: .635905564, z: 1}
   m_Children: []
   m_Father: {fileID: 1600721610}
@@ -886,7 +905,7 @@ MonoBehaviour:
   maxSpeed: 10
   light: {fileID: 0}
   sightMask: {fileID: 326440387}
-  sightRadius: 90
+  sightRadius: 50
 --- !u!61 &1053077792
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -897,8 +916,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1.22000003, y: 2.69000006}
-  m_Center: {x: .0599999987, y: .200000003}
+  m_Size: {x: 1.22000003, y: 2.53999996}
+  m_Center: {x: .0599999987, y: -.00999999978}
 --- !u!50 &1053077793
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -909,7 +928,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 1
+  m_GravityScale: 9
   m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -1153,6 +1172,7 @@ MonoBehaviour:
   madchen: {fileID: 1053077790}
   projectile: {fileID: 5000000, guid: 6482553338158d6488e562f6dbdd8bda, type: 2}
   speed: 10
+  pickUp: 0
 --- !u!1 &1373667789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1554,7 +1574,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1600721609}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.38553047, y: 1.39167404, z: 1.13032222}
+  m_LocalPosition: {x: .0526599884, y: 6.26656246, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1015237851}

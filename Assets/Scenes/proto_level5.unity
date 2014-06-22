@@ -154,7 +154,7 @@ Transform:
   m_PrefabInternal: {fileID: 1262404944}
   m_GameObject: {fileID: 14084487}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.87796974, y: 3.90856695, z: 1.13032222}
+  m_LocalPosition: {x: .245937347, y: 6.10327291, z: 1.13032222}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1819795829}
@@ -938,9 +938,9 @@ MonoBehaviour:
   platform: {fileID: 980452472}
   off: {fileID: 21300000, guid: 6e0681520057a1640948820dcf7cc6ea, type: 3}
   on: {fileID: 21300000, guid: e7b34d3f92e644e43b7fa746b5bf283e, type: 3}
-  moveFrom: {fileID: 995498165}
   moveTo: {fileID: 184709}
   moveSpeed: 1
+  moveBackSpeed: 1
   timer: 1
   seconds: 5
 --- !u!61 &692553515
@@ -1371,6 +1371,8 @@ MonoBehaviour:
   spottedColor: {r: .588235259, g: .108131476, b: .108131476, a: .419607848}
   distanceToTeddy: 1
   stayStill: 0
+  lookLeft: 0
+  ignoreTeddy: 0
 --- !u!61 &1161733048
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1431,11 +1433,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: e7ed9152bb8a8234595ec396c18acf37, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.87796974
+      value: .245937347
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: e7ed9152bb8a8234595ec396c18acf37, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.90856695
+      value: 6.10327291
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: e7ed9152bb8a8234595ec396c18acf37, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1463,11 +1465,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e7ed9152bb8a8234595ec396c18acf37, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.99640465
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e7ed9152bb8a8234595ec396c18acf37, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.31982183
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 21200000, guid: e7ed9152bb8a8234595ec396c18acf37, type: 2}
       propertyPath: m_Sprite
@@ -1481,6 +1483,10 @@ Prefab:
     - target: {fileID: 100000, guid: e7ed9152bb8a8234595ec396c18acf37, type: 2}
       propertyPath: m_Name
       value: hint_switch
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e7ed9152bb8a8234595ec396c18acf37, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7ed9152bb8a8234595ec396c18acf37, type: 2}
@@ -1574,6 +1580,7 @@ MonoBehaviour:
   madchen: {fileID: 1973302644}
   projectile: {fileID: 5000000, guid: 6482553338158d6488e562f6dbdd8bda, type: 2}
   speed: 10
+  pickUp: 0
 --- !u!1 &1471736526
 GameObject:
   m_ObjectHideFlags: 0
@@ -2060,7 +2067,7 @@ Transform:
   m_PrefabInternal: {fileID: 1262404944}
   m_GameObject: {fileID: 1819795828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.99640465, y: 2.31982183, z: -2.16064453}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: .63590759, y: .635905564, z: 1}
   m_Children: []
   m_Father: {fileID: 14084488}
