@@ -28,20 +28,11 @@ public class MadchenController : MonoBehaviour {
 	   	float move = Input.GetAxis("Horizontal");
 		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
 
-		GameObject hint = GameObject.Find("Hint");
-		Vector3 theScale = hint.transform.localScale;
-
         if (move > 0 && !facingRight) {
 			Flip ();
-			theScale.x = 1;
-			Debug.Log(theScale.x + " " + theScale.y + " " + theScale.z);
-			hint.transform.localScale = theScale;
 		}
 		else if (move < 0 && facingRight) {
 			Flip ();
-			theScale.x = -1;
-			Debug.Log(theScale.x + " " + theScale.y + " " + theScale.z);
-			hint.transform.localScale = theScale;
 		}
 	}
 
@@ -57,6 +48,13 @@ public class MadchenController : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+
+        GameObject hint = GameObject.Find("Hint");
+        if (hint != null) {
+            Vector3 hintScale = hint.transform.localScale;
+            hintScale.x *= -1;
+            hint.transform.localScale = hintScale;
+        }
     }
 
     public bool IsFacingRight() {
