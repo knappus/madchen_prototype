@@ -25,15 +25,24 @@ public class MadchenController : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-	   float move = Input.GetAxis("Horizontal");
+	   	float move = Input.GetAxis("Horizontal");
+		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
 
-       rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
+		GameObject hint = GameObject.Find("Hint");
+		Vector3 theScale = hint.transform.localScale;
 
-        if (move > 0 && !facingRight)
-            Flip();
-        else if (move<0 && facingRight)
-            Flip();
-
+        if (move > 0 && !facingRight) {
+			Flip ();
+			theScale.x = 1;
+			Debug.Log(theScale.x + " " + theScale.y + " " + theScale.z);
+			hint.transform.localScale = theScale;
+		}
+		else if (move < 0 && facingRight) {
+			Flip ();
+			theScale.x = -1;
+			Debug.Log(theScale.x + " " + theScale.y + " " + theScale.z);
+			hint.transform.localScale = theScale;
+		}
 	}
 
     void Init() {
