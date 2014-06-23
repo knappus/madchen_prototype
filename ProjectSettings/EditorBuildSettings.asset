@@ -19,3 +19,7 @@ EditorBuildSettings:
     path: Assets/Scenes/switch_level.unity
   - enabled: 1
     path: Assets/Scenes/proto_jump.unity
+  - enabled: 1
+    path: Assets/Scenes/proto_level_boss.unity
+  - enabled: 1
+    path: Assets/Scenes/thank_you_for_playing.unity

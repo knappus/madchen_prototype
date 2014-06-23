@@ -1313,7 +1313,7 @@ Transform:
   m_PrefabInternal: {fileID: 1859888140}
   m_GameObject: {fileID: 1035741519}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .128166199, y: 6.40430832, z: 1.13032222}
+  m_LocalPosition: {x: .128166199, y: 6.40430832, z: -2.6099999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 111030166}
@@ -1727,7 +1727,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: e7ed9152bb8a8234595ec396c18acf37, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.13032222
+      value: -2.6099999
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: e7ed9152bb8a8234595ec396c18acf37, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1905,9 +1905,9 @@ MonoBehaviour:
   sightMask: {fileID: 160459562}
   sightRadius: 90
   sightLength: 30
-  unitsToMove: 6
-  moveSpeed: 4
-  chaseSpeed: 12
+  unitsToMove: 12
+  moveSpeed: 3
+  chaseSpeed: 8
   madchenController: {fileID: 1778404379}
   defaultColor: {r: .558823526, g: .353373706, b: .353373706, a: .745098054}
   spottedColor: {r: .588235259, g: .108131476, b: .108131476, a: .419607848}
@@ -1922,7 +1922,7 @@ Transform:
   m_PrefabInternal: {fileID: 2034980576}
   m_GameObject: {fileID: 2000661153}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .521267891, y: 6.7949295e-05, z: 4}
+  m_LocalPosition: {x: -8.08593941, y: 6.7949295e-05, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 160459568}
@@ -1988,7 +1988,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .521267891
+      value: -8.08593941
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2022,6 +2022,18 @@ Prefab:
       propertyPath: madchenController
       value: 
       objectReference: {fileID: 1778404379}
+    - target: {fileID: 11400000, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
+      propertyPath: unitsToMove
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
+      propertyPath: chaseSpeed
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f42f42a47a555d4daf50160c1f30ca0, type: 2}
   m_RootGameObject: {fileID: 2000661153}

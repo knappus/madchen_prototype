@@ -44,6 +44,8 @@ public class MonsterController : MonoBehaviour {
 
     public bool ignoreTeddy = false;
 
+    public float yDisplacement = 0f;
+
 	// Use this for initialization
 	void Start () {
         this.player = GameObject.Find("Player");
@@ -322,8 +324,8 @@ public class MonsterController : MonoBehaviour {
         // Create Vector2 vertices
         Vector2[] sightMesh = new Vector2[] {
             new Vector2(origX, origY),
-            new Vector2(deltaX+origX, deltaY+origY),
-            new Vector2(deltaX+origX, -deltaY+origY)
+            new Vector2(deltaX+origX,  deltaY+yDisplacement+origY),
+            new Vector2(deltaX+origX, -deltaY+yDisplacement+origY)
         };
 
         return sightMesh;
