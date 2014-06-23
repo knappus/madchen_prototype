@@ -168,7 +168,7 @@ Transform:
   m_LocalScale: {x: 200, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 1208561410}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &105073970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ Transform:
   m_LocalScale: {x: 1.13, y: 5.5999999, z: 2}
   m_Children: []
   m_Father: {fileID: 1208561410}
-  m_RootOrder: 4
+  m_RootOrder: 0
 --- !u!114 &119849303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,7 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9798c9f58379a34baa79175c65c5f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: proto_level_boss
+  nextLevel: thank_you_for_playing
 --- !u!61 &506793957
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -711,7 +711,7 @@ Transform:
   m_LocalScale: {x: 26.2199993, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 1208561410}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &559823848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -906,7 +906,7 @@ Transform:
   m_LocalScale: {x: .958742023, y: 20.2207508, z: 2}
   m_Children: []
   m_Father: {fileID: 1208561410}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1001 &812116116
 Prefab:
   m_ObjectHideFlags: 0
@@ -1039,6 +1039,7 @@ MonoBehaviour:
   stayStill: 1
   lookLeft: 1
   ignoreTeddy: 0
+  yDisplacement: 0
 --- !u!61 &847348995
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1507,11 +1508,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 119849302}
   - {fileID: 1562357133}
   - {fileID: 612368152}
   - {fileID: 105073969}
   - {fileID: 559823847}
-  - {fileID: 119849302}
   m_Father: {fileID: 165649832}
   m_RootOrder: 0
 --- !u!1001 &1240021689
@@ -1791,7 +1792,7 @@ Transform:
   m_LocalScale: {x: .958741963, y: 20.2207508, z: 2}
   m_Children: []
   m_Father: {fileID: 1208561410}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &1562357134
 MonoBehaviour:
   m_ObjectHideFlags: 0

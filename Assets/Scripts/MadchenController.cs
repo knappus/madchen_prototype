@@ -18,6 +18,8 @@ public class MadchenController : MonoBehaviour {
     private int monsterLayer; 
     private int playerLayer;
 
+    public Color spottedColor = new Color(142, 90, 90, 1f);
+
 	// Use this for initialization
 	void Start () {
         Init();
@@ -34,6 +36,26 @@ public class MadchenController : MonoBehaviour {
 		else if (move < 0 && facingRight) {
 			Flip ();
 		}
+
+
+
+        if (Input.GetButtonDown("LoadLevel1"))
+            Application.LoadLevel("proto_level1");
+        if (Input.GetButtonDown("LoadLevel2"))
+            Application.LoadLevel("proto_level2");
+        if (Input.GetButtonDown("LoadLevel3"))
+            Application.LoadLevel("proto_level3");
+        if (Input.GetButtonDown("LoadLevel4"))
+            Application.LoadLevel("proto_level4");
+        if (Input.GetButtonDown("LoadLevel5"))
+            Application.LoadLevel("proto_level5");
+        if (Input.GetButtonDown("LoadLevel6"))
+            Application.LoadLevel("proto_level6_jump");
+        if (Input.GetButtonDown("LoadLevel7"))
+            Application.LoadLevel("proto_level7_lift");
+        if (Input.GetButtonDown("LoadLevel8"))
+            Application.LoadLevel("proto_level1");
+
 	}
 
     void Init() {
@@ -59,6 +81,17 @@ public class MadchenController : MonoBehaviour {
 
     public bool IsFacingRight() {
         return facingRight;
+    }
+
+
+    public void Spotted() {
+        SpriteRenderer renderer = (SpriteRenderer) GetComponent(typeof(SpriteRenderer));
+        renderer.color = spottedColor; // Set to opaque black
+    }
+
+    public void Unspotted() {
+        SpriteRenderer renderer = (SpriteRenderer) GetComponent(typeof(SpriteRenderer));
+        renderer.color = new Color(1f, 1f, 1f, 1f); // Set to opaque black
     }
 
     public void Hide() {
