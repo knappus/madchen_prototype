@@ -71,5 +71,11 @@ public class ShootingScriptC : MonoBehaviour {
         this.teddyProjectile = null;
         GameObject teddy = GameObject.Find("Teddy");
         teddy.renderer.enabled = true;
+
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster"); 
+        foreach (GameObject monster in monsters) {
+            MonsterController monsterController = monster.GetComponent("MonsterController") as MonsterController;
+            monsterController.ignoreTeddy = false;
+        }
     }
 }

@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 1845293967}
   m_GameObject: {fileID: 184708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.0129595, y: -15.2120409, z: 1.89502001}
+  m_LocalPosition: {x: 11.0129595, y: -17.7849903, z: 1.89502001}
   m_LocalScale: {x: 2.53000879, y: 2.53000617, z: 1}
   m_Children: []
   m_Father: {fileID: 692553517}
@@ -567,6 +567,10 @@ Prefab:
     - target: {fileID: 400006, guid: 30d1d7b2e8e10dc46b98237adf9d113d, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 30d1d7b2e8e10dc46b98237adf9d113d, type: 2}
+      propertyPath: pickUp
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30d1d7b2e8e10dc46b98237adf9d113d, type: 2}
@@ -1421,6 +1425,7 @@ MonoBehaviour:
   stayStill: 0
   lookLeft: 0
   ignoreTeddy: 0
+  yDisplacement: 0
 --- !u!61 &1161733048
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1559,7 +1564,7 @@ MonoBehaviour:
   madchen: {fileID: 1973302644}
   projectile: {fileID: 5000000, guid: 6482553338158d6488e562f6dbdd8bda, type: 2}
   speed: 10
-  pickUp: 0
+  pickUp: 1
 --- !u!1 &1471736526
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,6 +2174,10 @@ Prefab:
       propertyPath: platform
       value: 
       objectReference: {fileID: 980452472}
+    - target: {fileID: 400000, guid: 282c4c25d3b9ead4d91a918152e50ac9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -17.7849903
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 282c4c25d3b9ead4d91a918152e50ac9, type: 2}
   m_RootGameObject: {fileID: 692553513}
@@ -2203,7 +2212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9798c9f58379a34baa79175c65c5f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: proto_jump
+  nextLevel: proto_level6_jump
 --- !u!61 &1876400182
 BoxCollider2D:
   m_ObjectHideFlags: 0

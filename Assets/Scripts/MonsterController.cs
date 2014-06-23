@@ -16,7 +16,7 @@ public class MonsterController : MonoBehaviour {
     private GameObject chasedTeddy;
 
     private GameObject player;
-
+    private MadchenController playerScript;
 
     // enemies start and end position
     float startPos;
@@ -49,6 +49,7 @@ public class MonsterController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         this.player = GameObject.Find("Player");
+        this.playerScript = (MadchenController) player.GetComponent(typeof(MadchenController));
         this.monsterSightController = (MonsterSightController) sightMask.GetComponent(typeof(MonsterSightController));
         if (lookLeft)
             Flip();
@@ -129,6 +130,7 @@ public class MonsterController : MonoBehaviour {
 
     public void SpottedPlayer() {
         chasingPlayer = true;
+        playerScript.Spotted();
         // Debug.Log("Spotted Player");
         // LostTeddy();
         sightMask.GetComponent<MeshRenderer>().materials[0].color = spottedColor;
@@ -136,6 +138,7 @@ public class MonsterController : MonoBehaviour {
     }
     public void LostPlayer() {
         chasingPlayer = false;
+        playerScript.Unspotted();
         Debug.Log("Lost Player");
 
         sightMask.GetComponent<MeshRenderer>().materials[0].color = defaultColor;
@@ -182,6 +185,7 @@ public class MonsterController : MonoBehaviour {
         // FocusOnTeddy(teddy);
         // Debug.Log("Spotted Player");
     }
+
 
     public void IgnoreTeddy() {
         LostTeddy();
@@ -314,7 +318,7 @@ public class MonsterController : MonoBehaviour {
 
 
     Vector2[] GetFullSight() {
-
+        
         // calculate point 2
         float origX = transform.position.x;
         float origY = transform.position.y;
